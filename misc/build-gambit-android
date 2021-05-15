@@ -7,10 +7,12 @@
 # The following definitions should be adjusted to your context.
 
 # Where is the Android NDK?
-android_ndk_root="/Users/feeley/gambit/android-ndk-r8"
+#android_ndk_root="/Users/feeley/gambit/android-ndk-r8"
+android_sdk_root=/home/sto/Android/Sdk
+android_ndk_root=/home/sto/Android/Sdk/ndk
 
 # Which Android platform to target?
-android_platform="android-5"
+android_platform="android-29"
 
 # Which ./configure options are to be used?
 #config_options="--enable-single-host --enable-debug"
@@ -56,7 +58,7 @@ select_android()
 
   android_toolchain_dir="`pwd`/$platform-toolchain"
 
-  platforms_dir="$android_ndk_root/platforms"
+  platforms_dir="$android_sdk_root/platforms"
   android_platform_dir="$platforms_dir/$platform"
 
   if [ ! -d "$android_ndk_root" ]; then
@@ -78,8 +80,8 @@ select_android()
   echo "*** Please add to your path: $android_toolchain_dir/bin"
 
   rm -rf "$android_toolchain_dir"
-
-  $android_ndk_root/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
+  $android_ndk_root/21.3.6528147/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
+  #$android_ndk_root/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
 
   config_options_extras=--host=arm-eabi
 
@@ -102,7 +104,7 @@ download_gambit_dist_tgz()
   update_with_latest_changes="$update_with_latest_changes_if_downloaded"
 
   major_minor="`echo \"$gambit_dist\" | sed -e \"s/gambc-\\([^_]*_[^_]*\\)\\(.*\\)/\\1/g\" -e \"s/_/./g\"`"
-
+  echo "downloading here  $major_minor `pwd`"
   curl "http://www.iro.umontreal.ca/~gambit/download/gambit/$major_minor/source/$gambit_dist.tgz" > "$gambit_dist.tgz"
 }
 
