@@ -8,8 +8,8 @@
 
 # Where is the Android NDK?
 #android_ndk_root="/Users/feeley/gambit/android-ndk-r8"
-android_sdk_root=/home/sto/Android/Sdk
-android_ndk_root=/home/sto/Android/Sdk/ndk
+android_sdk_root=/home/sto/android
+android_ndk_root=/home/sto/android/ndk-bundle
 
 # Which Android platform to target?
 android_platform="android-29"
@@ -80,7 +80,7 @@ select_android()
   echo "*** Please add to your path: $android_toolchain_dir/bin"
 
   rm -rf "$android_toolchain_dir"
-  $android_ndk_root/21.3.6528147/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
+  $android_ndk_root/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
   #$android_ndk_root/build/tools/make-standalone-toolchain.sh --platform="$platform" --install-dir="$android_toolchain_dir"
 
   config_options_extras=--host=arm-eabi
